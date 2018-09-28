@@ -1,7 +1,7 @@
 require "jwt"
 class TokenGenerator
   def self.secret
-    TimeTrackerApi::Application.config.secret_token
+    'b258b53c90f5114abb07'
   end
 
   def self.generate_token(user_info)
