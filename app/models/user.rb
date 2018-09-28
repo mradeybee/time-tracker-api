@@ -8,6 +8,8 @@ class User < ApplicationRecord
 
   before_save :generate_refresh_token
 
+  has_many :timers
+
   def generate_refresh_token
    self.refresh_token = SecureRandom.hex(80)
   end
