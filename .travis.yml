@@ -1,9 +1,9 @@
 language: ruby
 cache:
-- bundler
+  - bundler
 before_script:
-- bundle exec rake db:create
-- bundle exec rake db:migrate
+  - bundle exec rake db:create
+  - bundle exec rake db:migrate
 deploy:
   provider: heroku
   api_key:
@@ -12,3 +12,6 @@ deploy:
   on:
     repo: mradeybee/time-tracker-api
     branch: master
+  run:
+    - "rake db:migrate"
+    - "rake cleanup"
