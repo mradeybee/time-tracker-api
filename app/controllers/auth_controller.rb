@@ -5,17 +5,17 @@ class AuthController < ApplicationController
     if @user
       render json: {jwt: TokenGenerator.generate_token({user: @user.id})}, status: :ok
     else
-      render json: {error: 'Invalid auth token'}
+      render json: {errors: 'Invalid Access Token'}, status: :unprocessable_entity
     end
   end
 
   def login
     user = User.find_by_email(auth_params[:email])
     if user && user.authenticate(auth_params[:password])
-      render json: {jwt: TokenGenerator.generate_token({user: user.id}), refresh_token: user.refresh_token}, status: :created
+      render json: {jwt: TokenGenerator.generate_token({user: user.id}), refresh_token: user.refresh_token}, status: :ok
     else
-      User.new(password: 'N0Password', email: 'noemail@email.xom').authenticate(auth_params[:password])
-      render json: {errors: 'Invalid cridentials'}
+      User.new(password: 'N0Password', email: 'noemail@email.xom').authenticate(auth_params[:password]) # This prevents time attacks from detecting valid emails.
+      render json: {errors: 'Invalid Cridentials'}, status: :unprocessable_entity
     end
   end
 
@@ -24,7 +24,7 @@ class AuthController < ApplicationController
     if @user && @user.regenerate_refresh_token
       render json: {}, status: :no_content
     else
-      render json: {errors: 'Invalid token'}
+      render json: {errors: 'Invalid Access Token'}, status: :unprocessable_entity
     end
   end
 

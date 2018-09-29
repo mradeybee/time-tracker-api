@@ -1,0 +1,15 @@
+language: ruby
+cache:
+  - bundler
+before_script:
+  - bundle exec rake db:create
+  - bundle exec rake db:migrate
+deploy:
+  provider: heroku
+  api_key:
+    secure: "VEbkEmOTDs9SC62ocVKFfgauFy/0cOMmzZgGPnzQUCbzMp+PEjMBCDG359q1imm+CCckGbautfWyoQ0JdkVrPkpg51IsIk6MRICzqC24H65sQ5K+dzqYpH8KY7x2oNaQnoClmC15NZkkkekbfbaomRXSgqDgpyfgiSjbTmRXYO5r3ETXON1EC3lR5/iFr/qzTJUgCtIzBKqIIMDi9keTsANGjlrPjAupCTNeBMdR6vsVK6AZc4HSPAQLvpG3ZBYhW7r9F9l3MhTeSLQItF4ZSMhojS23Ffn5O7YJtMY7ixzVrbms3EpIC1M46hjQtbOu751wvhV87po/nmSB2YSHTCtyZW6D8DTrxpv7xhy4oVNE3Ik9HhGHInzbYn+1ZtSB9pe3hxdau+NQY0xIjBESc6ueMfLHa2ERWqou7flonhg1tzmWeQgWPuzwdY882dT+FOj721MF2cOqR415nGBB4afcDClPbcwtkd/jKF4SWfNX2CK433zKHQtQ9nze8nlbn3DYljVxiXV4DUQhs9DEGreUp0Xp7Aj5ly4S9zZbEnP64tt6vMH86UdK09XPNQcdPG6S0XoB+Mfy1KaTfTyfz3H2ucKGaWWHIOzI3nW6G+nBY+T62EcmRuKk82t2j9j0fCM15eVaLuNa+NL+wIqzR9nm9SdpQMgzkFYhS2NYUZA="
+  app: t-tracker-api
+  on: master
+  run:
+    - "rake db:migrate"
+    - "rake cleanup"
