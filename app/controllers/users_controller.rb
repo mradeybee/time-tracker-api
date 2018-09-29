@@ -6,7 +6,7 @@ class UsersController < ApplicationController
       token = TokenGenerator.generate_token({user: user.id})
       render json: {jwt: token, refresh_token: user.refresh_token}, status: :created
     else
-      render json: { errors: user.errors.full_messages.join(', ') }, status: :unprocessable_entity
+      render json: {errors: user.errors.full_messages.join(', ')}, status: :unprocessable_entity
     end
   end
 

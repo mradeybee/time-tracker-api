@@ -1,7 +1,7 @@
 require "jwt"
 class TokenGenerator
   def self.secret
-    'b258b53c90f5114abb07'
+    ENV['SECRET']
   end
 
   def self.generate_token(user_info)
@@ -13,6 +13,6 @@ class TokenGenerator
     token = JWT.decode token, secret, true, algorithm: "HS512"
     token.first
   rescue JWT::DecodeError
-    {error: 'invalid token'}
+    {errors: 'Invalid Access Token'}
   end
 end

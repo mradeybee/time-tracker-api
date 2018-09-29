@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   post '/auth/login', to: 'auth#login', as: 'login'
   post '/auth/logout', to: 'auth#logout', as: 'logout'
-  get '/auth/refresh', to: 'auth#refresh_token', as: 'refresh_token'
+  post '/auth/refresh', to: 'auth#refresh_token', as: 'refresh_token'
   get '/user_timers', to: 'timer#user_timers', as: 'user_timers'
 
   resources :users, only: :create
