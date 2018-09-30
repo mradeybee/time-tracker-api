@@ -1,0 +1,562 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Time Tracker API</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="index" data-languages="[null,&quot;ruby&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo.png" class="logo" alt="Logo" />
+        <div class="lang-selector">
+              <a href="#" data-language-name=""></a>
+              <a href="#" data-language-name="ruby">ruby</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#running-the-application" class="toc-h1 toc-link" data-title="Running The Application">Running The Application</a>
+          </li>
+          <li>
+            <a href="#running-tests" class="toc-h1 toc-link" data-title="Running Tests">Running Tests</a>
+          </li>
+          <li>
+            <a href="#signing-up" class="toc-h1 toc-link" data-title="Signing Up">Signing Up</a>
+          </li>
+          <li>
+            <a href="#login" class="toc-h1 toc-link" data-title="Login">Login</a>
+          </li>
+          <li>
+            <a href="#logout" class="toc-h1 toc-link" data-title="Logout">Logout</a>
+          </li>
+          <li>
+            <a href="#refresh-token" class="toc-h1 toc-link" data-title="Refresh Token">Refresh Token</a>
+          </li>
+          <li>
+            <a href="#timer" class="toc-h1 toc-link" data-title="Timer">Timer</a>
+          </li>
+          <li>
+            <a href="#user-timers" class="toc-h1 toc-link" data-title="User Timers">User Timers</a>
+          </li>
+      </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='running-the-application'>Running The Application</h1>
+<ul>
+<li>Clone or download the app from <a href="https://github.com/mradeybee/time-tracker-api">github</a></li>
+</ul>
+
+<blockquote>
+<table><thead>
+<tr>
+</tr>
+</thead><tbody>
+</tbody></table>
+
+<p>$ git clone git@github.com:mradeybee/time-tracker-api.git</p>
+</blockquote>
+
+<ul>
+<li>Navigate to the app directory</li>
+</ul>
+
+<blockquote>
+<table><thead>
+<tr>
+</tr>
+</thead><tbody>
+</tbody></table>
+
+<p>$ cd time-tracker-api</p>
+</blockquote>
+
+<ul>
+<li>Bundle dependencies</li>
+</ul>
+
+<blockquote>
+<table><thead>
+<tr>
+</tr>
+</thead><tbody>
+</tbody></table>
+
+<p>$ bundle install</p>
+</blockquote>
+
+<ul>
+<li>Run Database setup</li>
+</ul>
+
+<blockquote>
+<table><thead>
+<tr>
+</tr>
+</thead><tbody>
+</tbody></table>
+
+<p>$ rails db:create &amp;&amp; rails db:migrate</p>
+</blockquote>
+
+<ul>
+<li>Setup environment variables</li>
+</ul>
+
+<blockquote>
+<table><thead>
+<tr>
+</tr>
+</thead><tbody>
+</tbody></table>
+
+<p>$ export SECRET=&quot;A SECRETE TOKEN&quot;</p>
+</blockquote>
+
+<ul>
+<li>Start the application</li>
+</ul>
+
+<blockquote>
+<table><thead>
+<tr>
+</tr>
+</thead><tbody>
+</tbody></table>
+
+<p>$ rails server</p>
+</blockquote>
+<h1 id='running-tests'>Running Tests</h1>
+<p>The tests are run using RSpec.</p>
+
+<blockquote>
+<p>$ rspec</p>
+</blockquote>
+<h1 id='signing-up'>Signing Up</h1>
+<p>The sign up endpoint takes a valid email and a password as the request payload, this creates a user record and returns an auth token.</p>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="ss">endpoint: </span><span class="no">POST</span> <span class="s1">'/users'</span>
+
+<span class="ss">payload: </span><span class="p">{</span> <span class="ss">auth: </span><span class="p">{</span> <span class="ss">email: </span><span class="s1">'valid@email.com'</span><span class="p">,</span> <span class="ss">password: </span><span class="s1">'securepassword'</span> <span class="p">}</span> <span class="p">}</span>
+
+</code></pre>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="ss">status: </span><span class="mi">201</span>
+
+<span class="ss">body: </span><span class="p">{</span> <span class="ss">jwt: </span><span class="s1">'valid auth token'</span><span class="p">,</span> <span class="ss">refresh_token: </span><span class="s1">'valid refresh token'</span> <span class="p">}</span>
+</code></pre><h1 id='login'>Login</h1>
+<p>The login endpoint takes a valid email and a password as the request payload, this logs a user in and returns an auth token if the login cridentials are correct.</p>
+
+<blockquote>
+<p>Request With Valid Cridentials</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="ss">endpoint: </span><span class="no">POST</span> <span class="s1">'/auth/login'</span>
+
+<span class="ss">payload: </span><span class="p">{</span> <span class="ss">auth: </span><span class="p">{</span> <span class="ss">email: </span><span class="s1">'valid@email.com'</span><span class="p">,</span> <span class="ss">password: </span><span class="s1">'securepassword'</span> <span class="p">}</span> <span class="p">}</span>
+
+</code></pre>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="ss">status: </span><span class="mi">200</span>
+
+<span class="ss">body: </span><span class="p">{</span> <span class="ss">jwt: </span><span class="s1">'valid auth token'</span><span class="p">,</span> <span class="ss">refresh_token: </span><span class="s1">'valid refresh token'</span> <span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Request With Wrong Cridentials</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="ss">endpoint: </span><span class="no">POST</span> <span class="s1">'/auth/login'</span>
+
+<span class="ss">payload: </span><span class="p">{</span> <span class="ss">auth: </span><span class="p">{</span> <span class="ss">email: </span><span class="s1">'valid@email.com'</span><span class="p">,</span> <span class="ss">password: </span><span class="s1">'wrongpassword'</span> <span class="p">}</span> <span class="p">}</span>
+
+</code></pre>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="ss">status: </span><span class="mi">422</span>
+
+<span class="ss">body: </span><span class="p">{</span> <span class="ss">errors: </span><span class="s1">'Invalid Cridentials'</span> <span class="p">}</span>
+</code></pre><h1 id='logout'>Logout</h1>
+<p>The logout endpoint takes the logged in user&#39;s refresh token as the request payload, this logs a user out and blacklists the auth token. The token will be invalid. The user&#39;s refresh token is also regenerated.</p>
+
+<blockquote>
+<p>Request With Valid Token</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="ss">endpoint: </span><span class="no">POST</span> <span class="s1">'/auth/logout'</span>
+
+<span class="ss">payload: </span><span class="p">{</span> <span class="ss">auth: </span><span class="p">{</span> <span class="ss">refresh_token: </span><span class="s1">'valid token'</span> <span class="p">}</span> <span class="p">}</span>
+
+<span class="ss">header: </span><span class="p">{</span> <span class="no">Authorization</span><span class="p">:</span> <span class="s1">'Valid Auth Token'</span> <span class="p">}</span>
+
+</code></pre>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="ss">status: </span><span class="mi">204</span>
+
+<span class="ss">body: </span><span class="p">{}</span>
+</code></pre>
+<blockquote>
+<p>Request With Wrong Cridentials</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="ss">endpoint: </span><span class="no">POST</span> <span class="s1">'/auth/logout'</span>
+
+<span class="ss">payload: </span><span class="p">{</span> <span class="ss">auth: </span><span class="p">{</span> <span class="ss">refresh_token: </span><span class="s1">'invalid token'</span> <span class="p">}</span> <span class="p">}</span>
+
+<span class="ss">header: </span><span class="p">{</span> <span class="no">Authorization</span><span class="p">:</span> <span class="s1">'Valid Auth Token'</span> <span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="ss">status: </span><span class="mi">422</span>
+
+<span class="ss">body: </span><span class="p">{</span> <span class="ss">errors: </span><span class="s1">'Invalid Access Token'</span> <span class="p">}</span>
+</code></pre><h1 id='refresh-token'>Refresh Token</h1>
+<p>The refresh endpoint takes the logged in user&#39;s refresh token as the request payload. This refreshes a user&#39;s auth token and extends its validity time.</p>
+
+<blockquote>
+<p>Request With Valid Token</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="ss">endpoint: </span><span class="no">POST</span> <span class="s1">'/auth/refresh'</span>
+
+<span class="ss">payload: </span><span class="p">{</span> <span class="ss">auth: </span><span class="p">{</span> <span class="ss">refresh_token: </span><span class="s1">'valid token'</span> <span class="p">}</span> <span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="ss">status: </span><span class="mi">200</span>
+
+<span class="ss">body: </span><span class="p">{</span> <span class="ss">jwt: </span><span class="s1">'valid auth token'</span> <span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Request With Wrong Cridentials</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="ss">endpoint: </span><span class="no">POST</span> <span class="s1">'/auth/refresh'</span>
+
+<span class="ss">payload: </span><span class="p">{</span> <span class="ss">auth: </span><span class="p">{</span> <span class="ss">refresh_token: </span><span class="s1">'invalid token'</span> <span class="p">}</span> <span class="p">}</span>
+
+</code></pre>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="ss">status: </span><span class="mi">422</span>
+
+<span class="ss">body: </span><span class="p">{</span> <span class="ss">errors: </span><span class="s1">'Invalid Access Token'</span> <span class="p">}</span>
+</code></pre><h1 id='timer'>Timer</h1>
+<p>The timer endpoint takes seconds, start_at and stop_at as the request payload. This saves a record of the time logged. The jwt auth token MUST be included in the header.</p>
+
+<blockquote>
+<p>Request With Correct Data</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="ss">endpoint: </span><span class="no">POST</span> <span class="s1">'/timer'</span>
+
+<span class="ss">payload: </span><span class="p">{</span> <span class="ss">timer: </span><span class="p">{</span> <span class="ss">seconds: </span><span class="mi">2613</span><span class="p">,</span> <span class="ss">start_at: </span><span class="s1">'2018-09-28 19:10:16'</span><span class="p">,</span> <span class="ss">stop_at: </span><span class="s1">'2018-09-28 19:10:19'</span> <span class="p">}</span> <span class="p">}</span>
+
+<span class="ss">header: </span><span class="p">{</span> <span class="no">Authorization</span><span class="p">:</span> <span class="s1">'Valid Auth Token'</span> <span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="ss">status: </span><span class="mi">201</span>
+
+<span class="ss">body: </span><span class="p">{</span> <span class="ss">timers: 
+        </span><span class="p">[</span> 
+            <span class="p">{</span> <span class="ss">id: </span><span class="mi">1</span><span class="p">,</span> <span class="ss">user_id: </span><span class="mi">1</span><span class="p">,</span> <span class="ss">seconds: </span><span class="mi">2613</span><span class="p">,</span> <span class="ss">start_at: </span><span class="s1">'2018-09-28 19:10:16'</span><span class="p">,</span> <span class="ss">stop_at: </span><span class="s1">'2018-09-28 19:10:19'</span><span class="p">,</span> <span class="ss">created_at: </span><span class="s1">'2018-09-29 13:49:52'</span><span class="p">,</span> <span class="ss">updated_at: </span><span class="s1">'2018-09-29 13:49:52'</span> <span class="p">},</span>
+            <span class="p">{</span> <span class="ss">id: </span><span class="mi">2</span><span class="p">,</span> <span class="ss">user_id: </span><span class="mi">1</span><span class="p">,</span> <span class="ss">seconds: </span><span class="mi">2613</span><span class="p">,</span> <span class="ss">start_at: </span><span class="s1">'2018-09-28 19:10:16'</span><span class="p">,</span> <span class="ss">stop_at: </span><span class="s1">'2018-09-28 19:10:19'</span><span class="p">,</span> <span class="ss">created_at: </span><span class="s1">'2018-09-29 13:49:52'</span><span class="p">,</span> <span class="ss">updated_at: </span><span class="s1">'2018-09-29 13:49:52'</span> <span class="p">},</span>
+            <span class="p">{</span> <span class="ss">id: </span><span class="mi">3</span><span class="p">,</span> <span class="ss">user_id: </span><span class="mi">1</span><span class="p">,</span> <span class="ss">seconds: </span><span class="mi">2613</span><span class="p">,</span> <span class="ss">start_at: </span><span class="s1">'2018-09-28 19:10:16'</span><span class="p">,</span> <span class="ss">stop_at: </span><span class="s1">'2018-09-28 19:10:19'</span><span class="p">,</span> <span class="ss">created_at: </span><span class="s1">'2018-09-29 13:49:52'</span><span class="p">,</span> <span class="ss">updated_at: </span><span class="s1">'2018-09-29 13:49:52'</span> <span class="p">},</span>
+            <span class="p">{</span> <span class="ss">id: </span><span class="mi">4</span><span class="p">,</span> <span class="ss">user_id: </span><span class="mi">1</span><span class="p">,</span> <span class="ss">seconds: </span><span class="mi">2613</span><span class="p">,</span> <span class="ss">start_at: </span><span class="s1">'2018-09-28 19:10:16'</span><span class="p">,</span> <span class="ss">stop_at: </span><span class="s1">'2018-09-28 19:10:19'</span><span class="p">,</span> <span class="ss">created_at: </span><span class="s1">'2018-09-29 13:49:52'</span><span class="p">,</span> <span class="ss">updated_at: </span><span class="s1">'2018-09-29 13:49:52'</span> <span class="p">}</span>
+        <span class="p">]</span> 
+      <span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Request With Wrong Cridentials</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="ss">endpoint: </span><span class="no">POST</span> <span class="s1">'/timer'</span>
+
+<span class="ss">payload: </span><span class="p">{</span> <span class="ss">timer: </span><span class="p">{</span> <span class="ss">seconds: </span><span class="mi">2613</span><span class="p">,</span> <span class="ss">start_at: </span><span class="s1">'2018-09-28 19:10:16'</span><span class="p">,</span> <span class="ss">stop_at: </span><span class="s1">'2018-09-28 19:10:19'</span> <span class="p">}</span> <span class="p">}</span>
+
+<span class="ss">header: </span><span class="p">{</span> <span class="no">Authorization</span><span class="p">:</span> <span class="s1">'Invalid Auth Token'</span> <span class="p">}</span>
+
+</code></pre>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="ss">status: </span><span class="mi">422</span>
+
+<span class="ss">body: </span><span class="p">{</span> <span class="ss">errors: </span><span class="s1">'Invalid Access Token'</span> <span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Request With Wrong Data</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="ss">endpoint: </span><span class="no">POST</span> <span class="s1">'/timer'</span>
+
+<span class="ss">payload: </span><span class="p">{</span> <span class="ss">timer: </span><span class="p">{</span> <span class="ss">seconds: </span><span class="kp">nil</span><span class="p">,</span> <span class="ss">start_at: </span><span class="kp">nil</span><span class="p">,</span> <span class="ss">stop_at: </span><span class="kp">nil</span> <span class="p">}</span> <span class="p">}</span>
+
+<span class="ss">header: </span><span class="p">{</span> <span class="no">Authorization</span><span class="p">:</span> <span class="s1">'Valid Auth Token'</span> <span class="p">}</span>
+
+</code></pre>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="ss">status: </span><span class="mi">422</span>
+
+<span class="ss">body: </span><span class="p">{</span> <span class="ss">errors: </span><span class="s2">"Seconds can't be blank, Start at can't be blank, Stop at can't be blank"</span> <span class="p">}</span>
+</code></pre><h1 id='user-timers'>User Timers</h1>
+<p>The refresh endpoint takes the logged in user&#39;s refresh token as the request payload. This refreshes a user&#39;s auth token and extends its validity time.</p>
+
+<blockquote>
+<p>Request With Valid Token</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="ss">endpoint: </span><span class="no">GET</span> <span class="s1">'/user_timers'</span>
+
+<span class="ss">header: </span><span class="p">{</span> <span class="no">Authorization</span><span class="p">:</span> <span class="s1">'Invalid Auth Token'</span> <span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="ss">status: </span><span class="mi">200</span>
+
+<span class="ss">body: </span><span class="p">{</span> <span class="ss">timers: 
+        </span><span class="p">[</span> 
+            <span class="p">{</span> <span class="ss">id: </span><span class="mi">1</span><span class="p">,</span> <span class="ss">user_id: </span><span class="mi">1</span><span class="p">,</span> <span class="ss">seconds: </span><span class="mi">2613</span><span class="p">,</span> <span class="ss">start_at: </span><span class="s1">'2018-09-28 19:10:16'</span><span class="p">,</span> <span class="ss">stop_at: </span><span class="s1">'2018-09-28 19:10:19'</span><span class="p">,</span> <span class="ss">created_at: </span><span class="s1">'2018-09-29 13:49:52'</span><span class="p">,</span> <span class="ss">updated_at: </span><span class="s1">'2018-09-29 13:49:52'</span> <span class="p">},</span>
+            <span class="p">{</span> <span class="ss">id: </span><span class="mi">2</span><span class="p">,</span> <span class="ss">user_id: </span><span class="mi">1</span><span class="p">,</span> <span class="ss">seconds: </span><span class="mi">2613</span><span class="p">,</span> <span class="ss">start_at: </span><span class="s1">'2018-09-28 19:10:16'</span><span class="p">,</span> <span class="ss">stop_at: </span><span class="s1">'2018-09-28 19:10:19'</span><span class="p">,</span> <span class="ss">created_at: </span><span class="s1">'2018-09-29 13:49:52'</span><span class="p">,</span> <span class="ss">updated_at: </span><span class="s1">'2018-09-29 13:49:52'</span> <span class="p">},</span>
+            <span class="p">{</span> <span class="ss">id: </span><span class="mi">3</span><span class="p">,</span> <span class="ss">user_id: </span><span class="mi">1</span><span class="p">,</span> <span class="ss">seconds: </span><span class="mi">2613</span><span class="p">,</span> <span class="ss">start_at: </span><span class="s1">'2018-09-28 19:10:16'</span><span class="p">,</span> <span class="ss">stop_at: </span><span class="s1">'2018-09-28 19:10:19'</span><span class="p">,</span> <span class="ss">created_at: </span><span class="s1">'2018-09-29 13:49:52'</span><span class="p">,</span> <span class="ss">updated_at: </span><span class="s1">'2018-09-29 13:49:52'</span> <span class="p">},</span>
+            <span class="p">{</span> <span class="ss">id: </span><span class="mi">4</span><span class="p">,</span> <span class="ss">user_id: </span><span class="mi">1</span><span class="p">,</span> <span class="ss">seconds: </span><span class="mi">2613</span><span class="p">,</span> <span class="ss">start_at: </span><span class="s1">'2018-09-28 19:10:16'</span><span class="p">,</span> <span class="ss">stop_at: </span><span class="s1">'2018-09-28 19:10:19'</span><span class="p">,</span> <span class="ss">created_at: </span><span class="s1">'2018-09-29 13:49:52'</span><span class="p">,</span> <span class="ss">updated_at: </span><span class="s1">'2018-09-29 13:49:52'</span> <span class="p">}</span>
+        <span class="p">]</span> 
+      <span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Request With Invalid Token</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="ss">endpoint: </span><span class="no">GET</span> <span class="s1">'/user_timers'</span>
+
+<span class="ss">header: </span><span class="p">{</span> <span class="no">Authorization</span><span class="p">:</span> <span class="s1">'Invalid Auth Token'</span> <span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="ss">status: </span><span class="mi">422</span>
+
+<span class="ss">body: </span><span class="p">{</span> <span class="ss">errors: </span><span class="s1">'Invalid Access Token'</span> <span class="p">}</span>
+</code></pre>
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name=""></a>
+                <a href="#" data-language-name="ruby">ruby</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
