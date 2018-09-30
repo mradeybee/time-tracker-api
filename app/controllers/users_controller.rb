@@ -3,10 +3,9 @@ class UsersController < ApplicationController
     user = User.new(user_params)
 
     if user.save
-      token = TokenGenerator.generate_token({user: user.id})
-      render json: {jwt: token, refresh_token: user.refresh_token}, status: :created
+      render_created({jwt: generate_access_token(user.id), refresh_token: user.refresh_token})
     else
-      render json: {errors: user.errors.full_messages.join(', ')}, status: :unprocessable_entity
+      render_errors({errors: user.errors.full_messages.join(', ')})
     end
   end
 

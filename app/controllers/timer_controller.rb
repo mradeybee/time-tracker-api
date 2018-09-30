@@ -3,19 +3,19 @@ class TimerController < ApplicationController
     timer = timer_data
 
     if current_user.nil?
-      render json: {errors: 'Invalid Access Token'}, status: :unprocessable_entity
+     render_unauthorized
     elsif timer.save
-      render json: {timers: current_user.timers.order(created_at: :desc)}, status: :created
+      render_created({timers: current_user.timers.order(created_at: :desc)})
     else
-      render json: {errors: timer.errors.full_messages.join(', ')}, status: :unprocessable_entity
+      render_errors({errors: timer.errors.full_messages.join(', ')})
     end
   end
 
   def user_timers
     if current_user.present?
-      render json: {timers: current_user.timers.order(created_at: :desc)}, status: :ok
+      render_ok({timers: current_user.timers.order(created_at: :desc)})
     else
-      render json: {errors: 'Invalid Access Token'}, status: :unprocessable_entity
+     render_unauthorized
     end
   end
 

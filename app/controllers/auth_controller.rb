@@ -2,29 +2,29 @@ class AuthController < ApplicationController
   before_action :get_user_from_refresh_token, only: [:refresh_token, :logout]
 
   def refresh_token
-    if @user
-      render json: {jwt: TokenGenerator.generate_token({user: @user.id})}, status: :ok
+    if @user && blacklist_access_token && @user.regenerate_refresh_token && @user.reload
+      render_ok({jwt: generate_access_token(@user.id), refresh_token: @user.refresh_token})
     else
-      render json: {errors: 'Invalid Access Token'}, status: :unprocessable_entity
+      render_unauthorized
     end
   end
 
   def login
     user = User.find_by_email(auth_params[:email])
+
     if user && user.authenticate(auth_params[:password])
-      render json: {jwt: TokenGenerator.generate_token({user: user.id}), refresh_token: user.refresh_token}, status: :ok
+      render_ok({jwt: generate_access_token(user.id), refresh_token: user.refresh_token})
     else
       User.new(password: 'N0Password', email: 'noemail@email.xom').authenticate(auth_params[:password]) # This prevents time attacks from detecting valid emails.
-      render json: {errors: 'Invalid Cridentials'}, status: :unprocessable_entity
+      render_errors({errors: 'Invalid Cridentials'})
     end
   end
 
   def logout
-    TokenBlacklist.create(token: access_token)
-    if @user && @user.regenerate_refresh_token
+    if @user && blacklist_access_token && @user.regenerate_refresh_token
       render json: {}, status: :no_content
     else
-      render json: {errors: 'Invalid Access Token'}, status: :unprocessable_entity
+      render_unauthorized
     end
   end
 
