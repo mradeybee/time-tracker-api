@@ -58,6 +58,10 @@ RSpec.describe AuthController, type: :request do
   
   describe 'refresh_token (POST /refresh)' do
     context 'with valid cridentials' do
+      it 'blacklists the token' do
+        expect { post '/auth/refresh', params: {auth: {refresh_token: user.refresh_token}}, headers: auth_header(user) }.to change(TokenBlacklist, :count).by(1)
+      end
+
       it 'logs out user' do
         post '/auth/refresh', params: {auth: {refresh_token: user.refresh_token}}, headers: auth_header(user)
 

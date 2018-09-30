@@ -1,11 +1,12 @@
 require "jwt"
+
 class TokenGenerator
   def self.secret
     ENV['SECRET']
   end
 
   def self.generate_token(user_info)
-    user_info.merge!(exp: Time.zone.now.to_i + 10 * 60 )
+    user_info.merge!(exp: Time.zone.now.to_i + 10 * 60)
     JWT.encode user_info, secret, "HS512"
   end
 
