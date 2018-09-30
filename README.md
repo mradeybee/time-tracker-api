@@ -1,24 +1,55 @@
-# README
+# Time Tracker API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# End Points Functionalities
+|End Point| Body Payload | Description  | Require Auth Token|
+|:---------------------:|  :----:| :----:| :----:|
+| **POST /users/** | email, password | Create User | false
+| **POST /auth/login**| email, password | Login user | false
+| **POST /auth/logout** | referesh_token | Log out user | true
+| **POST /auth/refresh** | referesh_token | Refresh user auth token | true
+| **POST /timer** | seconds, start_at, stop_at | Create Timer Record | true
+| **GET /user_timers** | - | Fetches all timer records logged by a logged in user | true
 
-Things you may want to cover:
+___
+[See Detailed Endpoints Documentation Here](https://t-tracker-api.herokuapp.com/)
+___
 
-* Ruby version
+# Running The Application
 
-* System dependencies
+-  Clone or download the repo
+```
+git clone git@github.com:mradeybee/time-tracker-api.git
+```
 
-* Configuration
+- Navigate to the app directory
+```
+cd time-tracker-api
+```
 
-* Database creation
+- Bundle dependencies
+```
+bundle install
+```
 
-* Database initialization
+- Run Database setup
+```
+rails db:create && rails db:migrate
+```
 
-* How to run the test suite
+- Setup environment variables
+```
+export SECRET='<A SECRETE TOKEN>'
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+- Start the application
+```
+rails server
+```
+___
 
-* Deployment instructions
+# Running Tests
 
-* ...
+The tests are run using RSpec.
+```
+rspec
+```
