@@ -437,7 +437,7 @@
 </blockquote>
 <pre class="highlight ruby tab-ruby"><code><span class="ss">status: </span><span class="mi">200</span>
 
-<span class="ss">body: </span><span class="p">{</span> <span class="ss">jwt: </span><span class="s1">'valid auth token'</span> <span class="p">}</span>
+<span class="ss">body: </span><span class="p">{</span> <span class="ss">jwt: </span><span class="s1">'valid auth token'</span>,  <span class="ss">refresh_token: </span><span class="s1">'valid token'</span>  <span class="p">}</span>
 </code></pre>
 <blockquote>
 <p>Request With Wrong Cridentials</p>
@@ -520,7 +520,7 @@
 </blockquote>
 <pre class="highlight ruby tab-ruby"><code><span class="ss">endpoint: </span><span class="no">GET</span> <span class="s1">'/user_timers'</span>
 
-<span class="ss">header: </span><span class="p">{</span> <span class="no">Authorization</span><span class="p">:</span> <span class="s1">'Invalid Auth Token'</span> <span class="p">}</span>
+<span class="ss">header: </span><span class="p">{</span> <span class="no">Authorization</span><span class="p">:</span> <span class="s1">'Valid Auth Token'</span> <span class="p">}</span>
 </code></pre>
 <blockquote>
 <p>Response</p>
